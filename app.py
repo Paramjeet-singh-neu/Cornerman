@@ -163,7 +163,7 @@ def render_feedback_architecture(fa: dict, round_name: str) -> None:
         audio_path = ROOT / "responses" / f"{round_name}_question.mp3"
         if audio_path.exists():
             st.audio(str(audio_path), format="audio/mp3")
-            st.caption("🎙 Hear it in the corner-coach voice — that's how feedback should sound.")
+            st.caption("🎙 The corner-coach voice.")
     if next_focus:
         st.markdown(f"_Next round, watch for:_ {next_focus}")
 
@@ -220,15 +220,11 @@ def render_progress_check(
         ).strip()
         if prev_pred or prev_q:
             st.markdown("---")
-            st.markdown("**The loop so far**")
+            st.markdown("**Last round**")
             if prev_pred:
-                st.markdown(f"- Last round, *you* predicted: _\"{prev_pred}\"_")
+                st.markdown(f"- You predicted: _\"{prev_pred}\"_")
             if prev_q:
                 st.markdown(f"- Cornerman asked: _\"{prev_q}\"_")
-            st.caption(
-                "Your words + the AI's question + this round's measurement = the loop. "
-                "Not a one-shot critique — a feedback architecture across time."
-            )
 
 
 def render_predict_first_gate(round_name: str) -> bool:
