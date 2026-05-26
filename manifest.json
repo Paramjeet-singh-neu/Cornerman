@@ -1,0 +1,40 @@
+{
+  "clips": [
+    {
+      "name": "round1",
+      "video": "clips/round1.mp4",
+      "intent": "Keep both hands up between every punch in my jab\u2013cross\u2013uppercut combo.",
+      "feedback_architecture": {
+        "intent_restated": "you said you'd keep both hands up between every punch in your jab\u2013cross\u2013uppercut combo.",
+        "moment": {
+          "timestamp": "0:01",
+          "observation": "Your left hand drops to your side as you throw the cross."
+        },
+        "question": "Where's your left hand right now?",
+        "next_round_focus": "left hand between punches"
+      },
+      "answer_machine": "To maintain proper defense during your jab-cross-uppercut combo, focus on keeping your non-punching hand up to protect your face with each punch. In the frames, it seems your rear hand drops slightly during the jab and cross, which could leave you vulnerable. Keep your elbows in and your hands high, ensuring your chin is tucked to minimize the target area. Additionally, ensure that your weight is evenly distributed between your feet, allowing for quick movement and balance. Rotate your hips and shoulders with each punch for more power while keeping your guard tight. Practice these adjustments to enhance both your offense and defense in the combo.",
+      "transfer_check": null
+    },
+    {
+      "name": "round2",
+      "video": "clips/round2.mp4",
+      "intent": "Move my head off the centerline after every combo before I reset.",
+      "feedback_architecture": {
+        "intent_restated": "you said you'd move your head off the centerline after every combo before you reset.",
+        "moment": {
+          "timestamp": "0:06",
+          "observation": "Your head stays centered as you finish the combo."
+        },
+        "question": "Where's your head after the combo?",
+        "next_round_focus": "head movement after combos"
+      },
+      "answer_machine": "You're doing a good job of moving your head off the centerline after each combo, but focus on making these movements more deliberate and sharper. Ensure you are not just leaning but also incorporating slight pivots or steps to maintain balance and readiness for the next action. Your footwork needs to be more coordinated with your upper body movement; make sure your lead foot steps in the direction of your head movement to keep your stance stable. Keep your hands up and your elbows in tight during these transitions to protect yourself from potential counters. Additionally, practice returning to your fighting stance quickly after each head movement to maintain your defensive posture and be prepared for the next attack.",
+      "transfer_check": {
+        "addressed": "partial",
+        "evidence_timestamp": "0:04",
+        "one_sentence": "The left hand drops slightly but remains closer to the chest compared to before."
+      }
+    }
+  ]
+}

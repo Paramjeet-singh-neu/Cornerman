@@ -1,0 +1,9 @@
+{
+  "intent_restated": "you said you'd move your head off the centerline after every combo before you reset.",
+  "moment": {
+    "timestamp": "0:06",
+    "observation": "Your head stays centered as you finish the combo."
+  },
+  "question": "Where's your head after the combo?",
+  "next_round_focus": "head movement after combos"
+}

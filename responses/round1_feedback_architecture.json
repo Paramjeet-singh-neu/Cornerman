@@ -1,0 +1,9 @@
+{
+  "intent_restated": "you said you'd keep both hands up between every punch in your jab\u2013cross\u2013uppercut combo.",
+  "moment": {
+    "timestamp": "0:01",
+    "observation": "Your left hand drops to your side as you throw the cross."
+  },
+  "question": "Where's your left hand right now?",
+  "next_round_focus": "left hand between punches"
+}
