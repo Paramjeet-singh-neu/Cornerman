@@ -1,0 +1,38 @@
+[project]
+name = "cornerman"
+version = "0.1.0"
+description = "A boxing tutor built around feedback architecture, not answer machines."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Paramjeet Singh" }]
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.32",
+    "openai>=1.30",
+    "opencv-python-headless>=4.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.4"]
+
+[project.urls]
+Homepage = "https://cornerman.streamlit.app/"
+Repository = "https://github.com/Paramjeet-singh-neu/Cornerman"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["venv", "frames", "responses", "clips"]
+
+[tool.ruff.lint]
+# Lenient by design — we catch genuine mistakes (unused imports, undefined names,
+# bare except), not stylistic preferences. This is a hackathon build, not a
+# style police state.
+select = ["E", "F", "I"]
+ignore = [
+    "E501",  # line length — handled by line-length above, not as a hard rule
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -92,9 +92,25 @@ AI-enhanced learning.* Each one is enforced by code, not by claim:
 ├── frames/round*/                  # Auto-extracted at 1 fps by prebake.
 ├── responses/                      # Cached JSON + text per round.
 ├── .streamlit/config.toml          # Brand theme, hide Streamlit chrome.
-├── .github/workflows/ci.yml        # Smoke tests on every push + PR.
-└── tests/test_smoke.py             # Import, prompt-rule, helper, manifest tests.
+├── .github/workflows/ci.yml        # Lint + smoke tests + structural eval on push.
+├── tests/test_smoke.py             # Import, prompt-rule, helper, manifest tests.
+├── eval/compare.py                 # Offline structural eval — see below.
+├── Makefile                        # `make test`, `make app`, `make eval`, etc.
+└── pyproject.toml                  # Project metadata + ruff config.
 ```
+
+### The structural eval
+
+`python -m eval.compare` reads the cached manifest and compares the two voices
+across every clip on six metrics: word count, sentence count, whether a
+question is asked, whether a timestamp is cited, whether the verbatim
+contract ("you said you'd") is used, and the count of imperative verbs.
+
+The thesis predicts the feedback-architecture column should be **short**,
+**ask a question**, **cite a timestamp**, **use the verbatim contract**, and
+use **few imperatives** — while the answer-machine column should be the
+opposite. **This eval runs in CI**. If a future prompt edit silently weakens
+the contrast, the pipeline fails.
 
 ---
 
