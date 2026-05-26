@@ -243,11 +243,8 @@ def render_predict_first_gate(round_name: str) -> bool:
     pred_key = f"pred_{round_name}"
     revealed = bool(st.session_state.get(reveal_key, False))
 
-    st.subheader("Predict first")
-    st.caption(
-        "Before the AI shows you anything: what would *you* flag in this attempt? "
-        "The loop only works if you do the thinking first — that's the whole pitch."
-    )
+    st.subheader("Your read")
+    st.caption("Note what you'd flag in this attempt before revealing the AI's view.")
     st.text_area(
         "Your prediction",
         key=pred_key,
