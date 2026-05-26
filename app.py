@@ -297,15 +297,31 @@ def render_round(clip: dict, prev_clip: dict | None = None) -> None:
         render_answer_machine(clip.get("answer_machine", "") or "")
 
 
+HERO_HTML = """
+<div style="padding: 1.25rem 0 0.25rem 0;">
+  <div style="display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px;
+              background: #FFE9EC; color: #C8102E; font-size: 0.78rem;
+              font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">
+    Feedback architecture · v0.1
+  </div>
+  <h1 style="margin: 0.6rem 0 0.4rem 0; font-size: 3rem; font-weight: 700;
+             letter-spacing: -0.02em; line-height: 1.05;">
+    Cornerman <span style="color: #E63946;">🥊</span>
+  </h1>
+  <p style="margin: 0; font-size: 1.15rem; color: #444; max-width: 56rem; line-height: 1.5;">
+    A boxing tutor that doesn't give answers. It surfaces the gap between
+    <em>intent</em> and <em>attempt</em> — as a <strong>question</strong>.
+  </p>
+</div>
+"""
+
+
 def main() -> None:
     st.set_page_config(page_title="Cornerman", page_icon="🥊", layout="wide")
-    st.title("Cornerman 🥊")
-    st.caption(
-        "A boxing tutor that doesn't give answers. "
-        "It surfaces the gap between intent and attempt — as a question."
-    )
+    st.markdown(HERO_HTML, unsafe_allow_html=True)
 
     render_about_panel()
+    st.markdown("")  # breathing room
 
     manifest = load_manifest()
     clips = manifest.get("clips", [])
@@ -318,11 +334,12 @@ def main() -> None:
         )
         return
 
-    labels = [f"Round {i + 1}" for i in range(len(clips))]
-    choice = st.radio("Round", labels, horizontal=True, label_visibility="collapsed")
-    idx = labels.index(choice)
-    prev_clip = clips[idx - 1] if idx > 0 else None
-    render_round(clips[idx], prev_clip)
+    tab_labels = [f"Round {i + 1}" for i in range(len(clips))]
+    tabs = st.tabs(tab_labels)
+    for i, tab in enumerate(tabs):
+        with tab:
+            prev_clip = clips[i - 1] if i > 0 else None
+            render_round(clips[i], prev_clip)
 
     st.divider()
     render_session_fundamentals(clips)
