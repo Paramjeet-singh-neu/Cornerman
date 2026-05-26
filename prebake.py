@@ -146,6 +146,22 @@ def call_answer_machine(
     return (resp.choices[0].message.content or "").strip()
 
 
+def call_tts_question(client: OpenAI, question: str, out_path: Path) -> None:
+    """Voice the AI's question in a corner-coach voice and write to disk.
+
+    The whole product is that the AI asks a question instead of giving an
+    answer. Hearing that question in a coach voice — between rounds, like a
+    real corner would — is the demo moment. Pre-bake so playback is instant
+    and offline.
+    """
+    response = client.audio.speech.create(
+        model="tts-1",
+        voice="onyx",
+        input=question,
+    )
+    out_path.write_bytes(response.content)
+
+
 def call_transfer_check(
     client: OpenAI, prior_round: dict, frame_paths: list[Path]
 ) -> dict:
@@ -238,6 +254,16 @@ def main() -> int:
                 tc_path,
                 lambda: call_transfer_check(client, captured_prior, frame_paths),
             )
+
+        # Voice the question in a corner-coach voice. Cached as mp3 on disk.
+        question_audio_path = RESPONSES_DIR / f"{name}_question.mp3"
+        question_text = (fa.get("question") or "").strip()
+        if question_text and not question_audio_path.exists():
+            try:
+                call_tts_question(client, question_text, question_audio_path)
+                print(f"  wrote:  {question_audio_path.name}")
+            except Exception as e:
+                print(f"  TTS failed for {name}: {e!r}")
 
         manifest_clips.append(
             {

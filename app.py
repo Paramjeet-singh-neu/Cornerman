@@ -160,6 +160,10 @@ def render_feedback_architecture(fa: dict, round_name: str) -> None:
             )
     if question:
         st.markdown(f"👉 **{question}**")
+        audio_path = ROOT / "responses" / f"{round_name}_question.mp3"
+        if audio_path.exists():
+            st.audio(str(audio_path), format="audio/mp3")
+            st.caption("🎙 Hear it in the corner-coach voice — that's how feedback should sound.")
     if next_focus:
         st.markdown(f"_Next round, watch for:_ {next_focus}")
 
